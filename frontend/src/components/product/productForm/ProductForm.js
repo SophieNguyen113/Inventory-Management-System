@@ -38,7 +38,7 @@ const ProductForm = ({
               <p>No image set for this poduct.</p>
             )}
           </Card>
-          <label>Product Name:</label>
+          <label>Product Name: </label>
           <input
             type="text"
             placeholder="Product name"
@@ -47,7 +47,7 @@ const ProductForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Product Category:</label>
+          <label>Product Category: </label>
           <input
             type="text"
             placeholder="Product Category"
@@ -56,7 +56,7 @@ const ProductForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Product Price:</label>
+          <label>Product Price: </label>
           <input
             type="text"
             placeholder="Product Price"
@@ -65,7 +65,7 @@ const ProductForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Product Quantity:</label>
+          <label>Product Quantity: </label>
           <input
             type="text"
             placeholder="Product Quantity"
@@ -74,7 +74,7 @@ const ProductForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Product Description:</label>
+          <label>Product Description: </label>
           <ReactQuill
             theme="snow"
             value={description}

@@ -54,12 +54,12 @@ const EditProfile = () => {
       ) {
         const image = new FormData();
         image.append("file", profileImage);
-        image.append("cloud_name", "zinotrust");
-        image.append("upload_preset", "mqxbycre");
+        image.append("cloud_name", "dhg3hzmpe");
+        image.append("upload_preset", "ueqnazpr");
 
         // First save image to cloudinary
         const response = await fetch(
-          "https://api.cloudinary.com/v1_1/zinotrust/image/upload",
+          "https://api.cloudinary.com/v1_1/dhg3hzmpe/image/upload",
           { method: "post", body: image }
         );
         const imgData = await response.json();
@@ -108,7 +108,7 @@ const EditProfile = () => {
               <label>Email:</label>
               <input type="text" name="email" value={profile?.email} disabled />
               <br />
-              <code>Email cannot be changed.</code>
+              <code>Email cannot be changed</code>
             </p>
             <p>
               <label>Phone:</label>

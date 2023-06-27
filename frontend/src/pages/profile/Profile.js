@@ -43,16 +43,16 @@ const Profile = () => {
             </span>
             <span className="profile-data">
               <p>
-                <b>Name : </b> {profile?.name}
+                <b>Name: </b> {profile?.name}
               </p>
               <p>
-                <b>Email : </b> {profile?.email}
+                <b>Email: </b> {profile?.email}
               </p>
               <p>
-                <b>Phone : </b> {profile?.phone}
+                <b>Phone: </b> {profile?.phone}
               </p>
               <p>
-                <b>Bio : </b> {profile?.bio}
+                <b>Bio: </b> {profile?.bio}
               </p>
               <div>
                 <Link to="/edit-profile">

@@ -35,23 +35,19 @@ const Home = () => {
           </ShowOnLogin>
         </ul>
       </nav>
-      {/* HERO SECTION */}
+      
       <section className="container hero">
         <div className="hero-text">
-          <h2>Inventory Management System</h2>
+          <h2>Inventory-Management-System</h2>
           <p>
           The Inventory Management System is a cutting-edge solution designed to streamline 
-          and optimize product control and management within a warehouse. 
+          and optimize product control and management within a warehouse
           </p>
-          <div className="hero-buttons">
-            <button className="--btn --btn-secondary">
-              <Link to="/dashboard">Free Trial 1 Year</Link>
-            </button>
-          </div>
+          
           <div className="--flex-start">
             <NumberText num="24K" text="Brand Owners" />
-            <NumberText num="10K" text="Active Users" />
-            <NumberText num="200+" text="Partners" />
+            <NumberText num="17K" text="Active Users" />
+            <NumberText num="250+" text="Partners" />
           </div>
         </div>
 

@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema(
     },
     name: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a name :>"],
       trim: true,
     },
     sku: {
@@ -20,22 +20,22 @@ const productSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      required: [true, "Please add a category"],
+      required: [true, "Please add a category :>"],
       trim: true,
     },
     quantity: {
       type: String,
-      required: [true, "Please add a quantity"],
+      required: [true, "Please add a quantity :>"],
       trim: true,
     },
     price: {
       type: String,
-      required: [true, "Please add a price"],
+      required: [true, "Please add a price :>"],
       trim: true,
     },
     description: {
       type: String,
-      required: [true, "Please add a description"],
+      required: [true, "Please add a description :>"],
       trim: true,
     },
     image: {

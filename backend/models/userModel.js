@@ -1,58 +1,60 @@
-const mongoose = require('mongoose');   
-const bcrypt = require('bcryptjs'); 
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema(
+  {
     name: {
-        type: String,   
-        required: [true, "Please enter your name"]
-    },  
+      type: String,
+      required: [true, "Please add a name :>"],
+    },
     email: {
-        type: String,   
-        required: [true, "Please enter your email"],
-        unique: true,
-        trim: true,
-        match: [
-            /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/,
-            "Please enter a valid email address"    
-        ]
-    } ,
-    password: {   
-        type: String,
-        required: [true, "Please enter your password"],
-        minLength: [6, "Your password must be at least 6 characters long"],
-        //maxLength: [23, "Your password must be at most 23 characters long"] 
+      type: String,
+      required: [true, "Please add a email :>"],
+      unique: true,
+      trim: true,
+      match: [
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        "Please enter a valid email :>",
+      ],
+    },
+    password: {
+      type: String,
+      required: [true, "Please add a password :>"],
+      minLength: [6, "Password must be at least 6 characters :>"],
+      //   maxLength: [23, "Password must not be more than 23 characters"],
     },
     photo: {
-        type: String,
-        required: [true, "Please add your photo"],
-        default: "https://i.pinimg.com/736x/67/a6/56/67a65600a05aa8890c1e86379aa8cfee.jpg"
+      type: String,
+      required: [true, "Please add a photo :>"],
+      default: "https://i.ibb.co/4pDNDk1/avatar.png",
     },
     phone: {
-        type: String,
-        default: "+123"
+      type: String,
+      default: "+123",
     },
     bio: {
-        type: String,
-        maxLength: [250, "Your bio must be at most 250 characters long"],
-        default: "bio"
-    }
-}, {
+      type: String,
+      maxLength: [250, "Bio must be at most 250 characters :>"],
+      default: "bio",
+    },
+  },
+  {
     timestamps: true,
-}); 
+  }
+);
 
-// Encrypt password before saving user
-userSchema.pre("save", async function(next){
-    if(!this.isModified("password")){
-        return next()
-    }
+//   Encrypt password before saving to DB
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(this.password, salt)
-    this.password = hashedPassword
-    next()
-})
+  // Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
+});
 
-const User = mongoose.model('User', userSchema);    
-
-module.exports = User;  
+const User = mongoose.model("User", userSchema);
+module.exports = User;

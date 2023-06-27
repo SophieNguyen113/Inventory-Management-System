@@ -32,16 +32,16 @@ const Register = () => {
     e.preventDefault();
 
     if (!name || !email || !password) {
-      return toast.error("All fields are required");
+      return toast.error("All fields are required :>");
     }
     if (password.length < 6) {
-      return toast.error("Passwords must be at least 6 characters");
+      return toast.error("Passwords must be at least 6 characters :>");
     }
     if (!validateEmail(email)) {
-      return toast.error("Please enter a valid email");
+      return toast.error("Please enter a valid email :>");
     }
     if (password !== password2) {
-      return toast.error("Passwords do not match");
+      return toast.error("Passwords do not match :>");
     }
 
     const userData = {

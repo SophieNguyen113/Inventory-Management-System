@@ -1,6 +1,6 @@
 const multer = require("multer");
 
-// Define storage for the images
+// Define file storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   },
 });
 
-// Specify the file types and limit
+// Specify file format that can be saved
 function fileFilter(req, file, cb) {
   if (
     file.mimetype === "image/png" ||

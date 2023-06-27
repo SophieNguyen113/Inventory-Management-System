@@ -25,7 +25,7 @@ const ChangePassword = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      return toast.error("New passwords do not match");
+      return toast.error("New passwords do not match :>");
     }
 
     const formData = {

@@ -30,11 +30,11 @@ const Login = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      return toast.error("All fields are required");
+      return toast.error("All fields are required :>");
     }
 
     if (!validateEmail(email)) {
-      return toast.error("Please enter a valid email");
+      return toast.error("Please enter a valid email :>");
     }
 
     const userData = {

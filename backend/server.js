@@ -23,10 +23,7 @@ app.use(
         credentials: true,
       })
 );
-<<<<<<< HEAD
-=======
 
->>>>>>> c2319fb46033db260988bb7bf942a9b3ab393816
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes Middleware

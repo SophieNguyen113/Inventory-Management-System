@@ -3,14 +3,17 @@ const Product = require("../models/productModel");
 const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
 
+// Create a product
 const createProduct = asyncHandler(async (req, res) => {
   const { name, sku, category, quantity, price, description } = req.body;
 
+  // Validate user input
   if (!name || !category || !quantity || !price || !description) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
 
+  // Manage file upload
   let fileData = {};
   if (req.file) {
     let uploadedFile;
@@ -32,6 +35,7 @@ const createProduct = asyncHandler(async (req, res) => {
     };
   }
 
+  // Create product
   const product = await Product.create({
     user: req.user.id,
     name,
@@ -46,11 +50,13 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(201).json(product);
 });
 
+// Get all products
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({ user: req.user.id }).sort("-createdAt");
   res.status(200).json(products);
 });
 
+// Get a product
 const getProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
@@ -66,9 +72,10 @@ const getProduct = asyncHandler(async (req, res) => {
   res.status(200).json(product);
 });
 
-
+// Delete a product
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findByIdAndDelete(req.params.id);
+  const product = await Product.findById(req.params.id);
+  //findByIdAndDelete
   
   if (!product) {
     res.status(404);
@@ -79,10 +86,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
+  await product.remove();
   res.status(200).json({ message: "Product deleted." });
 });
 
-
+// Update a product
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, category, quantity, price, description } = req.body;
   const { id } = req.params;
@@ -107,7 +115,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     let uploadedFile;
     try {
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-        folder: "Pinvent App",
+        folder: "Inventory-Management-System",
         resource_type: "image",
       });
     } catch (error) {

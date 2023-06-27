@@ -6,7 +6,7 @@ const cors = require('cors');
 const userRoute = require('./routes/userRoute');   
 const productRoute = require('./routes/productRoute'); 
 const contactRoute = require('./routes/contactRoute');   
-const errorHandler = require('./middleware/errorMiddleWare'); 
+const errorHandler = require('./middleWare/errorMiddleWare'); 
 const cookieParser = require('cookie-parser');
 const path = require('path');   
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json()); 
 app.use(
     cors({
-        origin: ["http://localhost:3000", "https://Inventory-Management-System.vercel.app"],
+        origin: ["http://localhost:3000", "https://inventory-management-system.vercel.app"],
         credentials: true,
       })
 );

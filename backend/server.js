@@ -12,6 +12,7 @@ const path = require('path');
 
 const app = express();  
 
+// Middleware
 app.use(express.json());  
 app.use(cookieParser())  
 app.use(express.urlencoded({ extended: false })); 
@@ -22,16 +23,23 @@ app.use(
         credentials: true,
       })
 );
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2319fb46033db260988bb7bf942a9b3ab393816
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Routes Middleware
 app.use("/api/users", userRoute);   
 app.use("/api/products", productRoute);  
 app.use("/api/contactus", contactRoute); 
 
+// Routes
 app.get('/', (req, res) => {
     res.send('Home Page');    
 }); 
 
+// Error Handler
 app.use(errorHandler);  
 
 const PORT = process.env.PORT || 5000;

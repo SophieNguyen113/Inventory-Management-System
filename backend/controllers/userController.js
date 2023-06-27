@@ -9,10 +9,11 @@ const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1d"})
 };
 
-
+// Register user
 const registerUser = asyncHandler (async (req, res) => {
     const { name, email, password } = req.body;
 
+    // Check if user exists
     if (!name || !email || !password) {
         res.status(400);
         throw new Error('Please fill in all fields');   
@@ -23,6 +24,7 @@ const registerUser = asyncHandler (async (req, res) => {
         throw new Error('Password must be at least 6 characters');   
     }   
 
+    // Check if user email exists
     const userExists = await User.findOne({ email });
 
     if (userExists) {
@@ -30,20 +32,22 @@ const registerUser = asyncHandler (async (req, res) => {
         throw new Error('User already exists');   
     }
 
-
+    // Create new user
     const user = await User.create({ 
         name,
         email,
         password,
     })
 
+    // Create token
     const token = generateToken(user._id);
 
+    // Send HTTP-only cookie
     if (passwordIsCorrect) {
         res.cookie("token", token, {
             path: "/",
             httpOnly: true,
-            exprires: new Date(Date.now() + 1000 * 86400),
+            exprires: new Date(Date.now() + 1000 * 86400), // 1 day
             sameSite: "none",
             secure: true
         })
@@ -63,15 +67,18 @@ const registerUser = asyncHandler (async (req, res) => {
 
 });
 
+// Login user
 const loginUser = asyncHandler( async (req, res) => {
     
     const {email, password} = req.body
 
+    // Validate email and password
     if (!email || !password) {
         res.status(400);
         throw new Error('Please add email and password');   
     }
 
+    // Check if user exists
     const user = await User.findOne({email});
 
     if (!user) {
@@ -79,6 +86,7 @@ const loginUser = asyncHandler( async (req, res) => {
         throw new Error('User not found, please sign up');   
     }
 
+    // User exists, check if password is correct
     const passwordIsCorrect = await bcrypt.compare(password, user.password)
 
     const token = generateToken(user._id);
@@ -103,6 +111,7 @@ const loginUser = asyncHandler( async (req, res) => {
 
 });
 
+// Logout user
 const logoutUser = asyncHandler (async (req, res) => {
     res.cookie("token", "", {
         path: "/",
@@ -114,6 +123,7 @@ const logoutUser = asyncHandler (async (req, res) => {
     return res.status(200).json({message: "Successfully Logged Out"})
 })
 
+// Get user profile 
 const getUser = asyncHandler (async (req, res) => {
     const user = await User.findById(req.user._id)
 
@@ -128,12 +138,13 @@ const getUser = asyncHandler (async (req, res) => {
     }
 })
 
+// Login status
 const loginStatus = asyncHandler (async (req, res) => {
     const token = req.cookies.token
         if(!token){
             return res.json(false)
         }
-    
+    // Verify token
     const verified = jwt.verify(token, process.env.JWT_SECRET)
     if(verified){
         return res.json(true)
@@ -141,6 +152,7 @@ const loginStatus = asyncHandler (async (req, res) => {
     return res.json(false)
 })
 
+// Update user profile  
 const updateUser = asyncHandler (async (req, res) => {
     const user = await User.findById(req.user._id)
 
@@ -168,6 +180,7 @@ const updateUser = asyncHandler (async (req, res) => {
 
 })
 
+// Change password, not forgot password
 const changePassword = asyncHandler (async (req, res) => {
     const user = await User.findById(req.user._id)
 
@@ -178,12 +191,14 @@ const changePassword = asyncHandler (async (req, res) => {
         throw new Error('User not found, please sign up');   
     }
 
+    // Validate email and password
     if (!oldPassword || !password) {
         res.status(400);
         throw new Error('Please add old and new password');
 
     }
 
+    // Check if old password matches password in database
     const passwordIsCorrect = await bcrypt.compare(oldPassword, user.password)
 
     if (user && passwordIsCorrect){
@@ -196,6 +211,7 @@ const changePassword = asyncHandler (async (req, res) => {
     }
 })
 
+// Forgot password
 const forgotPassword = asyncHandler(async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
@@ -204,39 +220,98 @@ const forgotPassword = asyncHandler(async (req, res) => {
       res.status(404);
       throw new Error("User does not exist");
     }
-  
+    
+    // Delete any existing reset tokens
     let token = await Token.findOne({ userId: user._id });
     if (token) {
       await token.deleteOne();
     }
   
+    // Create reset token
     let resetToken = crypto.randomBytes(32).toString("hex") + user._id;
     console.log(resetToken);
-  
+    
+    // Hash reset token and save to database
     const hashedToken = crypto
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
 
+    // Save token to database
     await new Token({
       userID: user._id,
       token: hashedToken,
       createdAt: Date.now(),
-      expriresAt: Date.now() + 30 * (60 * 1000), 
+      expriresAt: Date.now() + 30 * (60 * 1000), // 30 minutes
     }).save();
-  
+    
+    // Construct reset password url
     const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+    
+    // Reset email template
+    // const message = `
+    //     <h2>Hello ${user.name}</h2>
+    //     <p>Please use the url below to reset your password</p>  
+    //     <p>This reset link is valid for only 30minutes.</p>
   
+    //     <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+  
+    //     <p>Warm wishes,</p>
+    //     <p>Sophie Nguyen</p>
+    //   `;
+
     const message = `
-        <h2>Hello ${user.name}</h2>
-        <p>Please use the url below to reset your password</p>  
-        <p>This reset link is valid for only 30minutes.</p>
+    <html>
+      <head>
+        <style>
+          /* CSS styles for the email */
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+          }
+    
+          h2 {
+            color: #333333;
+          }
+    
+          p {
+            color: #555555;
+          }
+    
+          a {
+            color: #007bff;
+            text-decoration: none;
+          }
+        </style>
+      </head>
+    
+      <body>
+        <div>
+          <h2>Hello ${user.name},</h2>
+    
+          <p>We noticed that you need to reset your password.</p>
+    
+          <p>Please click the button below to securely reset your password:</p>
+    
+          <p style="text-align: center;">
+            <a href="${resetUrl}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; border-radius: 5px; text-decoration: none;">Reset Password</a>
+          </p>
+    
+          <p style="font-size: 12px;">Note: This reset link is valid for 30 minutes only.</p>
+    
+          <p>If you didn't request a password reset, you can safely ignore this email.</p>
+    
+          <p>Warm wishes,</p>
+    
+          <p>Your Support Team</p>
+
+          <p>Sophie Nguyen</p>
+        </div>
+      </body>
+    </html>
+  `;
   
-        <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
-  
-        <p>Warm wishes,</p>
-        <p>Sophie Nguyen</p>
-      `;
+
     const subject = "Password Reset Request";
     const send_to = user.email;
     const sent_from = process.env.EMAIL_USER;
@@ -250,16 +325,18 @@ const forgotPassword = asyncHandler(async (req, res) => {
     }
   });
 
-
+// Reset password
 const resetPassword = asyncHandler(async (req, res) => {
     const { password } = req.body;
     const { resetToken } = req.params;
   
+    // Hash token and compare with database
     const hashedToken = crypto
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
   
+    // Find token in database
     const userToken = await Token.findOne({
       token: hashedToken,
       expiresAt: { $gt: Date.now() },
@@ -269,7 +346,8 @@ const resetPassword = asyncHandler(async (req, res) => {
       res.status(404);
       throw new Error("Invalid or Expired Token");
     }
-  
+    
+    // Find user and update password
     const user = await User.findOne({ _id: userToken.userId });
     user.password = password;
     await user.save();

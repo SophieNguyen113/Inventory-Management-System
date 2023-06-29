@@ -51,7 +51,7 @@ const ProductDetail = () => {
                   alt={product.image.fileName}
                 />
               ) : (
-                <p>No image set for this product</p>
+                <p>No Image Set For This Product</p>
               )}
             </Card>
             <h4>Product Availability: {stockStatus(product.quantity)}</h4>
@@ -60,20 +60,20 @@ const ProductDetail = () => {
               <span className="badge">Name: </span> &nbsp; {product.name}
             </h4>
             <p>
-              <b>&rarr; SKU: </b> {product.sku}
+              <b>&rarr; SKU : </b> {product.sku}
             </p>
             <p>
-              <b>&rarr; Category: </b> {product.category}
+              <b>&rarr; Category : </b> {product.category}
             </p>
             <p>
-              <b>&rarr; Price: </b> {"$"}
+              <b>&rarr; Price : </b> {"$"}
               {product.price}
             </p>
             <p>
-              <b>&rarr; Quantity in stock: </b> {product.quantity}
+              <b>&rarr; Quantity in stock : </b> {product.quantity}
             </p>
             <p>
-              <b>&rarr; Total Value in stock: </b> {"$"}
+              <b>&rarr; Total Value in stock : </b> {"$"}
               {product.price * product.quantity}
             </p>
             <hr />

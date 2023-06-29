@@ -1,20 +1,23 @@
-import { FaTh, FaRegChartBar, FaCommentAlt } from "react-icons/fa";
-import { BiImageAdd } from "react-icons/bi";
+import { RiDashboardLine } from "react-icons/ri";
+import { MdPlaylistAdd } from "react-icons/md";
+import { FaRegAddressBook } from "react-icons/fa";
+import { TbMessageReport } from "react-icons/tb";
+
 
 const menu = [
   {
     title: "Dashboard",
-    icon: <FaTh />,
+    icon: <RiDashboardLine color = "purple" />,
     path: "/dashboard",
   },
   {
     title: "Add Product",
-    icon: <BiImageAdd />,
+    icon: <MdPlaylistAdd color = "green" />,
     path: "/add-product",
   },
   {
     title: "Account",
-    icon: <FaRegChartBar />,
+    icon: <FaRegAddressBook color = "blue" />,
     childrens: [
       {
         title: "Profile",
@@ -28,7 +31,7 @@ const menu = [
   },
   {
     title: "Report Bug",
-    icon: <FaCommentAlt />,
+    icon: <TbMessageReport color = "red" />,
     path: "/contact-us",
   },
 ];

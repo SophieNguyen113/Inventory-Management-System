@@ -75,7 +75,7 @@ const getProduct = asyncHandler(async (req, res) => {
 
 // Delete Product
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findByIdAndDelete(req.params.id);
   // if product doesnt exist
   if (!product) {
     res.status(404);
@@ -86,7 +86,6 @@ const deleteProduct = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized :>");
   }
-  await product.remove();
   res.status(200).json({ message: "Product deleted :>" });
 });
 

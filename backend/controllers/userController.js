@@ -256,17 +256,59 @@ const forgotPassword = asyncHandler(async (req, res) => {
   // Construct Reset Url
   const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
 
-  // Reset Email
+  // Reset Email Template
   const message = `
-      <h2>Hello ${user.name}</h2>
-      <p>Please use the url below to reset your password</p>  
-      <p>This reset link is valid for only 30minutes.</p>
+  <html>
+    <head>
+      <style>
+        /* CSS styles for the email */
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.5;
+        }
+  
+        h2 {
+          color: #333333;
+        }
+  
+        p {
+          color: #555555;
+        }
+  
+        a {
+          color: #007bff;
+          text-decoration: none;
+        }
+      </style>
+    </head>
+  
+    <body>
+      <div>
+        <h3>Hello ${user.name},</h3>
+  
+        <p>We noticed that you need to reset your password.</p>
+  
+        <p>Please click the button below to securely reset your password:</p>
+  
+        <p style="text-align: center;">
+          <a href="${resetUrl}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; border-radius: 5px; text-decoration: none;">Reset Password</a>
+        </p>
+  
+        <p style="font-size: 12px;">Note: This reset link is valid for 30 minutes only.</p>
+  
+        <p>If you didn't request a password reset, you can safely ignore this email.</p>
+  
+        <p>Warm wishes,</p>
+  
+        <p>Your Support Team</p>
 
-      <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+        <p>Sophie Nguyen</p>
+      </div>
+    </body>
+  </html>
+`;
 
-      <p>Regards...</p>
-      <p>Pinvent Team</p>
-    `;
+
   const subject = "Password Reset Request";
   const send_to = user.email;
   const sent_from = process.env.EMAIL_USER;

@@ -1,24 +1,17 @@
-body {
-  margin: 0;
+.auth {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #5ec7cf;
-}
-
-.auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   .img {
     animation: slide-down 0.5s ease;
   }
 
   .form {
-    width: 43rem;
-    padding: 3rem;
+    width: 35rem;
+    padding: 1.5rem;
     animation: slide-up 0.5s ease;
     background-color: #fff;
     h2 {

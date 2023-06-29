@@ -99,7 +99,7 @@ const EditProfile = () => {
               <label>Name:</label>
               <input
                 type="text"
-                name="name"
+                name="name" 
                 value={profile?.name}
                 onChange={handleInputChange}
               />
@@ -114,6 +114,7 @@ const EditProfile = () => {
               <label>Phone:</label>
               <input
                 type="text"
+                placeholder="Please enter your phone number"
                 name="phone"
                 value={profile?.phone}
                 onChange={handleInputChange}
@@ -123,6 +124,7 @@ const EditProfile = () => {
               <label>Bio:</label>
               <textarea
                 name="bio"
+                placeholder="Please enter your bio"
                 value={profile?.bio}
                 onChange={handleInputChange}
                 cols="30"

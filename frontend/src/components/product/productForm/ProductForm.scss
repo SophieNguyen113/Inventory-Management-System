@@ -4,6 +4,7 @@
     width: 100%;
     max-width: 500px;
     padding: 1rem;
+    
   }
   form {
     label {
@@ -38,7 +39,7 @@
 
 .image-preview {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-height: 280px;
   background: var(--dark-blue);
   padding: 1rem;
@@ -46,10 +47,15 @@
   overflow: hidden;
   // display: none;
   transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+
 .image-preview img {
-  width: 100%;
+  max-width: 100%;
+      
 }
 
 .image-show {

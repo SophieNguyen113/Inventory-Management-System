@@ -84,7 +84,7 @@ const ProductList = ({ products, isLoading }) => {
       <div className="table">
         <div className="--flex-between --flex-dir-column">
           <span>
-            <h3>Inventory Items</h3>
+            <h3>Inventory Management Items</h3>
           </span>
           <span>
             <Search
@@ -98,7 +98,7 @@ const ProductList = ({ products, isLoading }) => {
 
         <div className="table">
           {!isLoading && products.length === 0 ? (
-            <p>-- No product found, please add a product...</p>
+            <p>No Products Found. Please Add A Product.</p>
           ) : (
             <table>
               <thead>

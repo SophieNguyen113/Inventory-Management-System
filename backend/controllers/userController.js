@@ -284,13 +284,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
   
     <body>
       <div>
-        <h3>Hello ${user.name},</h3>
+        <p>Hello ${user.name},</p>
   
         <p>We noticed that you need to reset your password.</p>
   
         <p>Please click the button below to securely reset your password:</p>
   
-        <p style="text-align: center;">
+        <p style="text-align: left;">
           <a href="${resetUrl}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; border-radius: 5px; text-decoration: none;">Reset Password</a>
         </p>
   

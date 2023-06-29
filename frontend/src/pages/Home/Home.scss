@@ -1,5 +1,5 @@
 .home {
-  background-color: #030b6b;
+  background-color: #5ec7cf;
   min-height: 100vh;
 
   & nav {
@@ -46,7 +46,7 @@
 .hero-image {
   width: 50%;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .hero {
     flex-direction: column;
   }

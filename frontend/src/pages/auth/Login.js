@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./auth.module.scss";
-import { BiLogIn } from "react-icons/bi";
+import { RiLoginCircleLine } from "react-icons/ri";
 import Card from "../../components/card/Card";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -60,7 +60,7 @@ const Login = () => {
       <Card>
         <div className={styles.form}>
           <div className="--flex-center">
-            <BiLogIn size={35} color="#999" />
+            <RiLoginCircleLine size={35} color="#007bff" />
           </div>
           <h2>Login</h2>
 

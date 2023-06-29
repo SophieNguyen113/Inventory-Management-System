@@ -1,8 +1,8 @@
 import React from "react";
-import { RiProductHuntLine } from "react-icons/ri";
+import { FaCloudversify } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Home.scss";
-import heroImg from "../../assets/inv-img.png";
+import heroImg from "../../assets/inv-img1.png";
 import { ShowOnLogin, ShowOnLogout } from "../../components/protect/HiddenLink";
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
     <div className="home">
       <nav className="container --flex-between ">
         <div className="logo">
-          <RiProductHuntLine size={35} />
+          <FaCloudversify size={80} />
         </div>
 
         <ul className="home-links">
@@ -35,13 +35,12 @@ const Home = () => {
           </ShowOnLogin>
         </ul>
       </nav>
-      
       <section className="container hero">
         <div className="hero-text">
-          <h2>Inventory-Management-System</h2>
+          <h2>Inventory Management System</h2>
           <p>
           The Inventory Management System is a cutting-edge solution designed to streamline 
-          and optimize product control and management within a warehouse
+          and optimize product control and management within a warehouse.
           </p>
           
           <div className="--flex-start">

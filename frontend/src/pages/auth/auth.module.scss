@@ -1,5 +1,13 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5ec7cf;
+}
+
 .auth {
-  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,8 +17,8 @@
   }
 
   .form {
-    width: 35rem;
-    padding: 1.5rem;
+    width: 43rem;
+    padding: 3rem;
     animation: slide-up 0.5s ease;
     background-color: #fff;
     h2 {

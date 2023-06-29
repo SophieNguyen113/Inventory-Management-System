@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./auth.module.scss";
-import { MdPassword } from "react-icons/md";
+import { PiPasswordBold } from "react-icons/pi";
 import Card from "../../components/card/Card";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -50,7 +50,7 @@ const Reset = () => {
       <Card>
         <div className={styles.form}>
           <div className="--flex-center">
-            <MdPassword size={35} color="#999" />
+            <PiPasswordBold size={35} color="#007bff" />
           </div>
           <h2>Reset Password</h2>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./auth.module.scss";
-import { AiOutlineMail } from "react-icons/ai";
+import { BiMailSend } from "react-icons/bi";
 import Card from "../../components/card/Card";
 import { Link } from "react-router-dom";
 import { forgotPassword, validateEmail } from "../../services/authService";
@@ -32,7 +32,7 @@ const Forgot = () => {
       <Card>
         <div className={styles.form}>
           <div className="--flex-center">
-            <AiOutlineMail size={35} color="#999" />
+            <BiMailSend size={35} color="#007bff" />
           </div>
           <h2>Forgot Password</h2>
 
